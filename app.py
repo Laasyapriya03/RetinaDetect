@@ -167,7 +167,7 @@ def check_authentication():
 def login_page():
     """Enhanced login page with modern design"""
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
-    st.markdown('<div class="login-header"><h1>🔬 RetinaScan AI</h1><p>Advanced Retinoblastoma Diagnostic Platform</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-header"><h1>RetinaScan AI</h1><p>Advanced Retinoblastoma Diagnostic Platform</p></div>', unsafe_allow_html=True)
     
     # Demo credentials info
     st.info("**Demo Access:** Use username 'doctor' and password 'medical123' for demonstration")
@@ -179,7 +179,7 @@ def login_page():
         
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            submit = st.form_submit_button("🔐 Sign In", use_container_width=True)
+            submit = st.form_submit_button("Sign In", use_container_width=True)
         
         if submit:
             # Simple authentication (in production, use proper authentication)
@@ -187,11 +187,11 @@ def login_page():
                 st.session_state['authenticated'] = True
                 st.session_state['username'] = username
                 st.session_state['login_time'] = time.time()
-                st.success("✅ Login successful! Redirecting...")
+                st.success("Login successful! Redirecting...")
                 time.sleep(1)
                 st.rerun()
             else:
-                st.error("❌ Invalid credentials. Please try again.")
+                st.error("Invalid credentials. Please try again.")
     
     st.markdown('</div>', unsafe_allow_html=True)
     
@@ -221,7 +221,7 @@ def main():
     # Main header with enhanced design
     st.markdown("""
     <div class="main-header">
-        <h1>🔬 RetinaScan AI Diagnostic Platform</h1>
+        <h1>RetinaScan AI Diagnostic Platform</h1>
         <p style="font-size: 18px; margin: 0;">Advanced CNN-based Retinoblastoma Detection & Clinical Staging System</p>
         <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Powered by VGG16 Architecture • 90%+ Diagnostic Accuracy</p>
     </div>
@@ -229,26 +229,26 @@ def main():
     
     # Enhanced sidebar with user info
     with st.sidebar:
-        st.markdown('<div class="sidebar-logo"><h3>🔬 RetinaScan AI</h3></div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-logo"><h3>RetinaScan AI</h3></div>', unsafe_allow_html=True)
         
         # User info
-        st.markdown(f"👨‍⚕️ **Welcome, Dr. {st.session_state.get('username', 'User')}**")
-        if st.button("🚪 Sign Out", key="logout"):
+        st.markdown(f"**Welcome, Dr. {st.session_state.get('username', 'User')}**")
+        if st.button("Sign Out", key="logout"):
             logout()
         
         st.markdown("---")
         
         # Enhanced navigation
-        st.markdown("### 📋 Navigation Menu")
+        st.markdown("### Navigation Menu")
         page = st.selectbox(
             "Select Module",
-            ["🔍 Diagnostic Analysis", "📊 Model Performance", "📚 Educational Resources", "👁️ About Retinoblastoma"],
+            ["Diagnostic Analysis", "Model Performance", "Educational Resources", "About Retinoblastoma"],
             key="navigation"
         )
         
         # Quick stats
         st.markdown("---")
-        st.markdown("### 📈 System Status")
+        st.markdown("### System Status")
         st.markdown("""
         <div class="metric-card">
             <h4>Model Accuracy</h4>
@@ -266,7 +266,7 @@ def main():
     # Medical disclaimer with enhanced styling
     st.markdown("""
     <div class="warning-banner">
-        <h4>⚠️ Important Medical Disclaimer</h4>
+        <h4>Important Medical Disclaimer</h4>
         <p><strong>MEDICAL DISCLAIMER:</strong> This AI diagnostic tool is intended for educational and research purposes only. 
         It should NOT be used as a substitute for professional medical diagnosis, treatment, or advice. 
         Always consult with qualified healthcare professionals for medical decisions.</p>
@@ -274,19 +274,19 @@ def main():
     """, unsafe_allow_html=True)
     
     # Route to appropriate page
-    if page == "🔍 Diagnostic Analysis":
+    if page == "Diagnostic Analysis":
         diagnostic_analysis_page()
-    elif page == "📊 Model Performance":
+    elif page == "Model Performance":
         model_performance_page()
-    elif page == "📚 Educational Resources":
+    elif page == "Educational Resources":
         educational_resources_page()
-    elif page == "👁️ About Retinoblastoma":
+    elif page == "About Retinoblastoma":
         about_retinoblastoma_page()
 
 def diagnostic_analysis_page():
     """Enhanced diagnostic analysis interface"""
     st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-    st.markdown("## 🔍 AI-Powered Diagnostic Analysis")
+    st.markdown("## AI-Powered Diagnostic Analysis")
     st.markdown("Upload retinal images for comprehensive retinoblastoma detection and staging analysis")
     st.markdown('</div>', unsafe_allow_html=True)
     
@@ -300,7 +300,7 @@ def diagnostic_analysis_page():
     
     with col1:
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 📤 Image Upload")
+        st.markdown("### Image Upload")
         
         uploaded_file = st.file_uploader(
             "Choose a retinal/eye photograph",
@@ -312,12 +312,12 @@ def diagnostic_analysis_page():
         if uploaded_file is not None:
             # Display uploaded image with enhanced styling
             image = Image.open(uploaded_file)
-            st.image(image, caption="📸 Uploaded Retinal Image", use_container_width=True)
+            st.image(image, caption="Uploaded Retinal Image", use_container_width=True)
             
             # Enhanced image information
             st.markdown(f"""
             <div style="background: #f0f7ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                <h5>📊 Image Details</h5>
+                <h5>Image Details</h5>
                 <p><strong>Dimensions:</strong> {image.size[0]} × {image.size[1]} pixels</p>
                 <p><strong>Format:</strong> {image.format}</p>
                 <p><strong>File Size:</strong> {len(uploaded_file.getvalue()) / 1024:.1f} KB</p>
@@ -325,8 +325,8 @@ def diagnostic_analysis_page():
             """, unsafe_allow_html=True)
             
             # Enhanced analysis button
-            if st.button("🔍 Run AI Analysis", type="primary", use_container_width=True):
-                with st.spinner("🧠 Processing image and running AI analysis..."):
+            if st.button("Run AI Analysis", type="primary", use_container_width=True):
+                with st.spinner("Processing image and running AI analysis..."):
                     # Simulate processing time for better UX
                     progress = st.progress(0)
                     for i in range(100):
@@ -344,7 +344,7 @@ def diagnostic_analysis_page():
                     st.session_state.original_image = image
                     st.session_state.processed_image = processed_image
                 
-                st.markdown('<div class="success-banner"><h4>✅ Analysis completed successfully!</h4></div>', unsafe_allow_html=True)
+                st.markdown('<div class="success-banner"><h4>Analysis completed successfully</h4></div>', unsafe_allow_html=True)
                 st.rerun()
         
         else:
@@ -369,13 +369,13 @@ def diagnostic_analysis_page():
         else:
             st.markdown("""
             <div class="feature-card">
-                <h3>🎯 Analysis Results</h3>
+                <h3>Analysis Results</h3>
                 <p>Upload an image to see comprehensive diagnostic analysis including:</p>
                 <ul>
-                    <li>🔍 Tumor detection with confidence scores</li>
-                    <li>📋 Clinical staging classification</li>
-                    <li>🎨 Tumor segmentation and spread analysis</li>
-                    <li>📊 Risk assessment and treatment recommendations</li>
+                    <li>Tumor detection with confidence scores</li>
+                    <li>Clinical staging classification</li>
+                    <li>Tumor segmentation and spread analysis</li>
+                    <li>Risk assessment and treatment recommendations</li>
                 </ul>
             </div>
             """, unsafe_allow_html=True)
@@ -383,7 +383,7 @@ def diagnostic_analysis_page():
 def display_analysis_results(results, original_image, visualizer, staging_classifier):
     """Display comprehensive analysis results with enhanced styling"""
     st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-    st.markdown("## 🎯 AI Diagnostic Results")
+    st.markdown("## AI Diagnostic Results")
     
     # Detection results with enhanced styling
     detection_prob = results.get('detection_probability', 0.0)
@@ -393,7 +393,7 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
     if is_positive:
         st.markdown(f"""
         <div class="diagnostic-result positive-result">
-            <h3>⚠️ POSITIVE Detection</h3>
+            <h3>POSITIVE Detection</h3>
             <h4>Confidence: {detection_prob:.1%}</h4>
             <p>Retinoblastoma indicators detected. Immediate clinical evaluation recommended.</p>
         </div>
@@ -401,7 +401,7 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
     else:
         st.markdown(f"""
         <div class="diagnostic-result negative-result">
-            <h3>✅ NEGATIVE Detection</h3>
+            <h3>NEGATIVE Detection</h3>
             <h4>Confidence: {(1-detection_prob):.1%}</h4>
             <p>No significant retinoblastoma indicators detected.</p>
         </div>
@@ -444,7 +444,7 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
     if is_positive:
         # Enhanced staging analysis
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 📋 Clinical Staging Analysis")
+        st.markdown("### Clinical Staging Analysis")
         
         staging_results = results.get('staging', {})
         predicted_stage = staging_results.get('stage', 'Unknown')
@@ -473,7 +473,7 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
         
         # Enhanced tumor characteristics
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 🔬 Comprehensive Tumor Analysis")
+        st.markdown("### Comprehensive Tumor Analysis")
         
         tumor_features = results.get('tumor_features', {})
         
@@ -510,40 +510,40 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
         # Enhanced segmentation visualization
         if 'segmentation_mask' in results:
             st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-            st.markdown("### 🎨 AI Tumor Segmentation")
+            st.markdown("### AI Tumor Segmentation")
             st.markdown("Advanced computer vision analysis highlighting detected tumor regions")
             
             segmented_image = visualizer.overlay_segmentation(
                 original_image, 
                 results['segmentation_mask']
             )
-            st.image(segmented_image, caption="🎯 Tumor Regions Highlighted by AI", use_container_width=True)
+            st.image(segmented_image, caption="Tumor Regions Highlighted by AI", use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         # Enhanced staging information
         staging_details = staging_classifier.get_staging_details(predicted_stage)
-        with st.expander("📖 Detailed Clinical Staging Information", expanded=False):
+        with st.expander("Detailed Clinical Staging Information", expanded=False):
             st.markdown(staging_details)
         
         # Enhanced treatment recommendations
         st.markdown('<div class="feature-card">', unsafe_allow_html=True)
-        st.markdown("### 💊 Clinical Considerations & Treatment Guidelines")
+        st.markdown("### Clinical Considerations & Treatment Guidelines")
         recommendations = staging_classifier.get_treatment_considerations(predicted_stage)
         
         for i, rec in enumerate(recommendations):
             if rec.startswith("Primary treatment"):
-                st.markdown(f"**🎯 {rec}**")
+                st.markdown(f"**{rec}**")
             elif rec.startswith("Monitoring"):
-                st.markdown(f"**⏰ {rec}**")
+                st.markdown(f"**{rec}**")
             elif rec.startswith("Treatment options"):
-                st.markdown(f"**💊 {rec}**")
+                st.markdown(f"**{rec}**")
             else:
                 st.markdown(f"• {rec}")
         st.markdown('</div>', unsafe_allow_html=True)
 
 def model_performance_page():
     """Display model performance metrics and validation results"""
-    st.header("📊 Model Performance Metrics")
+    st.header("Model Performance Metrics")
     
     # Simulated performance metrics (in real implementation, load from model training history)
     performance_data = {
@@ -622,12 +622,12 @@ def model_performance_page():
 
 def educational_resources_page():
     """Educational content about retinoblastoma and AI diagnosis"""
-    st.header("📚 Educational Resources")
+    st.header("Educational Resources")
     
     tab1, tab2, tab3 = st.tabs(["AI Technology", "Clinical Guidelines", "Research Updates"])
     
     with tab1:
-        st.subheader("🤖 AI Technology Overview")
+        st.subheader("AI Technology Overview")
         
         st.markdown("""
         ### VGG16-Based CNN Architecture
@@ -668,7 +668,7 @@ def educational_resources_page():
         """)
     
     with tab2:
-        st.subheader("🏥 Clinical Staging Guidelines")
+        st.subheader("Clinical Staging Guidelines")
         
         staging_info = MedicalInfo.get_staging_guidelines()
         
@@ -680,7 +680,7 @@ def educational_resources_page():
                 st.write(f"**Treatment Approach:** {info['treatment']}")
     
     with tab3:
-        st.subheader("🔬 Recent Research Updates")
+        st.subheader("Recent Research Updates")
         
         st.markdown("""
         ### Latest Developments in AI-Assisted Retinoblastoma Diagnosis
@@ -700,7 +700,7 @@ def educational_resources_page():
 
 def about_retinoblastoma_page():
     """Comprehensive information about retinoblastoma"""
-    st.header("👁️ About Retinoblastoma")
+    st.header("About Retinoblastoma")
     
     medical_info = MedicalInfo()
     
