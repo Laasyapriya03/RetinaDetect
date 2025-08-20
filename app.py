@@ -87,63 +87,7 @@ st.markdown(f"""
         border: 1px solid #2c3e50;
     }}
     
-    .login-page {{
-        background: {colors['bg_primary']};
-        min-height: 100vh;
-        padding: 2rem;
-    }}
-    
-    .login-container {{
-        max-width: 800px;
-        width: 100%;
-        margin: 0 auto;
-        background: {colors['bg_card']};
-        border-radius: 8px;
-        box-shadow: 0 2px 8px {colors['shadow']};
-        border: 1px solid #e1e8ed;
-        overflow: hidden;
-    }}
-    
-    .login-content {{
-        display: flex;
-        min-height: 500px;
-    }}
-    
-    .login-form-section {{
-        flex: 1;
-        padding: 2rem;
-    }}
-    
-    .login-info-section {{
-        flex: 1;
-        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
-        color: white;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }}
-    
-    .feature-list {{
-        list-style: none;
-        padding: 0;
-        margin: 1rem 0;
-    }}
-    
-    .feature-list li {{
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }}
-    
-    .feature-list li:last-child {{
-        border-bottom: none;
-    }}
-    
-    .login-header {{
-        text-align: center;
-        margin-bottom: 2rem;
-        color: {colors['text_primary']};
-    }}
+
     
     .success-banner {{
         background: {colors['success']};
@@ -219,12 +163,7 @@ st.markdown(f"""
         border-right: 1px solid #e1e8ed;
     }}
     
-    /* Responsive design for login page */
-    @media (max-width: 768px) {{
-        .login-content {{
-            flex-direction: column;
-        }}
-    }}
+
     
     /* Remove default streamlit styling */
     .stSelectbox > div > div {{
@@ -267,70 +206,7 @@ def hash_password(password):
     """Simple password hashing"""
     return hashlib.sha256(str.encode(password)).hexdigest()
 
-def check_authentication():
-    """Check if user is authenticated"""
-    return st.session_state.get('authenticated', False)
 
-
-
-def login_page():
-    """Enhanced login page with app overview and sign-in"""
-    st.markdown('<div class="login-page">', unsafe_allow_html=True)
-    st.markdown('<div class="login-container">', unsafe_allow_html=True)
-    st.markdown('<div class="login-content">', unsafe_allow_html=True)
-    
-    # Left side - App overview
-    st.markdown("""
-    <div class="login-info-section">
-        <h1>RetinaScan AI</h1>
-        <h2>Advanced Retinoblastoma Diagnostic Platform</h2>
-        
-        <div style="margin: 2rem 0;">
-            <h3>Overview</h3>
-            <p>RetinaScan AI is a comprehensive medical diagnostic system powered by advanced VGG16 CNN architecture for retinoblastoma detection and clinical staging.</p>
-            
-            <p>Our platform provides healthcare professionals with AI-powered diagnostic capabilities, achieving 90%+ accuracy in tumor detection and automated clinical staging following International Classification guidelines.</p>
-            
-            <p>The system integrates advanced image processing, tumor segmentation, and evidence-based treatment recommendations to support clinical decision-making.</p>
-        </div>
-        
-        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
-            <p><strong>Professional Medical Platform</strong></p>
-            <p>Designed for Healthcare Professionals</p>
-            <p>Secure • HIPAA Compliant • Evidence-Based</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Right side - Sign in form
-    st.markdown('<div class="login-form-section">', unsafe_allow_html=True)
-    st.markdown('<div class="login-header"><h2>Professional Access</h2></div>', unsafe_allow_html=True)
-    
-    # Demo credentials info
-    st.info("**Demo Access:** Use username 'doctor' and password 'medical123' for demonstration")
-    
-    with st.form("login_form"):
-        st.markdown("### Sign In")
-        username = st.text_input("Username", placeholder="Enter your username")
-        password = st.text_input("Password", type="password", placeholder="Enter your password")
-        
-        submit = st.form_submit_button("Sign In", use_container_width=True)
-        
-        if submit:
-            # Simple authentication (in production, use proper authentication)
-            if username == "doctor" and password == "medical123":
-                st.session_state['authenticated'] = True
-                st.session_state['username'] = username
-                st.session_state['login_time'] = time.time()
-                st.success("Login successful! Redirecting...")
-                time.sleep(1)
-                st.rerun()
-            else:
-                st.error("Invalid credentials. Please try again.")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('</div></div></div>', unsafe_allow_html=True)
     
     # Footer
     st.markdown("---")
@@ -371,10 +247,6 @@ def render_navigation():
 
 # Main application
 def main():
-    # Check authentication
-    if not check_authentication():
-        login_page()
-        return
     
     # Main header with enhanced design
     st.markdown("""
