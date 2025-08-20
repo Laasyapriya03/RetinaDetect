@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 UI/UX preferences: Modern, formal medical interface with clean professional design, no icons or emojis.
 Visual enhancements: Clean, professional medical interface with subtle shadows and borders, formal appearance.
 Access: Direct access without authentication for streamlined user experience.
-Navigation: Portrait-friendly tab navigation with 2-column layout instead of dropdown menus.
+Navigation: Dropdown menu system for easy section selection.
 
 ## System Architecture
 

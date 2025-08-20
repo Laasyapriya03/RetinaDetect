@@ -206,27 +206,14 @@ def hash_password(password):
     """Simple password hashing"""
     return hashlib.sha256(str.encode(password)).hexdigest()
 
-
-    
-    # Footer
-    st.markdown("---")
-    st.markdown("""
-    <div style='text-align: center; color: #666;'>
-        <p><strong>RetinaScan AI</strong> - Professional Medical Diagnostic System</p>
-        <p>Powered by Advanced CNN Technology • Secure • HIPAA Compliant</p>
-    </div>
-    """, unsafe_allow_html=True)
-
 def logout():
-    """Logout function"""
-    for key in ['authenticated', 'username', 'login_time']:
-        if key in st.session_state:
-            del st.session_state[key]
+    """Logout function placeholder"""
+    st.session_state.clear()
     st.rerun()
 
 # Portrait navigation component
 def render_navigation():
-    """Render navigation in portrait mode with tabs"""
+    """Render navigation with dropdown menu"""
     nav_options = ["Diagnostic Analysis", "Model Performance", "Educational Resources", "About Retinoblastoma"]
     
     if 'current_page' not in st.session_state:
@@ -234,14 +221,18 @@ def render_navigation():
     
     st.markdown("### Navigation")
     
-    # Create navigation tabs in portrait mode
-    cols = st.columns(2)
-    for i, option in enumerate(nav_options):
-        col_idx = i % 2
-        with cols[col_idx]:
-            if st.button(option, key=f"nav_{i}", use_container_width=True):
-                st.session_state.current_page = option
-                st.rerun()
+    # Dropdown navigation menu
+    current_index = nav_options.index(st.session_state.current_page) if st.session_state.current_page in nav_options else 0
+    selected_page = st.selectbox(
+        "Choose a section:",
+        options=nav_options,
+        index=current_index,
+        key="navigation_dropdown"
+    )
+    
+    if selected_page != st.session_state.current_page:
+        st.session_state.current_page = selected_page
+        st.rerun()
     
     return st.session_state.current_page
 
@@ -257,14 +248,9 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Enhanced sidebar with user info
+    # Enhanced sidebar
     with st.sidebar:
         st.markdown('<div class="sidebar-logo"><h3>RetinaScan AI</h3></div>', unsafe_allow_html=True)
-        
-        # User info and logout
-        st.markdown(f"**Welcome, Dr. {st.session_state.get('username', 'User')}**")
-        if st.button("Sign Out", key="logout"):
-            logout()
         
         st.markdown("---")
         
