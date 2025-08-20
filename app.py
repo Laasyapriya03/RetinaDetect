@@ -48,13 +48,13 @@ def get_theme_colors():
         }
     else:
         return {
-            'bg_primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            'bg_secondary': '#f8f9ff',
+            'bg_primary': '#f5f7fa',
+            'bg_secondary': '#ffffff',
             'bg_card': '#ffffff',
             'text_primary': '#2c3e50',
             'text_secondary': '#5a6c7d',
-            'accent_primary': '#4a90e2',
-            'accent_secondary': '#6bb6ff',
+            'accent_primary': '#34495e',
+            'accent_secondary': '#2c3e50',
             'success': '#27ae60',
             'warning': '#f39c12',
             'error': '#e74c3c',
@@ -78,35 +78,35 @@ st.markdown(f"""
     }}
     
     .main-header {{
-        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
+        background: {colors['accent_primary']};
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 8px;
         margin-bottom: 2rem;
         color: white;
         text-align: center;
-        box-shadow: 0 8px 32px {colors['shadow']};
-        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px {colors['shadow']};
+        border: 1px solid #e1e8ed;
     }}
     
     .feature-card {{
         background: {colors['bg_card']};
         padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px {colors['shadow']};
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 1px 3px {colors['shadow']};
+        border: 1px solid #e1e8ed;
         margin: 1rem 0;
         color: {colors['text_primary']};
-        backdrop-filter: blur(10px);
     }}
     
     .metric-card {{
-        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
+        background: {colors['accent_primary']};
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 6px;
         color: white;
         text-align: center;
         margin: 0.5rem 0;
-        box-shadow: 0 4px 15px {colors['shadow']};
+        box-shadow: 0 1px 3px {colors['shadow']};
+        border: 1px solid #2c3e50;
     }}
     
     .login-page {{
@@ -123,10 +123,9 @@ st.markdown(f"""
         width: 100%;
         padding: 2rem;
         background: {colors['bg_card']};
-        border-radius: 20px;
-        box-shadow: 0 20px 60px {colors['shadow']};
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(15px);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px {colors['shadow']};
+        border: 1px solid #e1e8ed;
     }}
     
     .login-header {{
@@ -136,67 +135,69 @@ st.markdown(f"""
     }}
     
     .success-banner {{
-        background: linear-gradient(90deg, {colors['success']} 0%, #a8e6cf 100%);
+        background: {colors['success']};
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 6px;
         color: white;
         text-align: center;
         margin: 1rem 0;
-        box-shadow: 0 4px 15px {colors['shadow']};
+        box-shadow: 0 1px 3px {colors['shadow']};
+        border: 1px solid #27ae60;
     }}
     
     .warning-banner {{
-        background: linear-gradient(90deg, {colors['warning']} 0%, #ffd54f 100%);
+        background: {colors['warning']};
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 6px;
         color: white;
         margin: 1rem 0;
-        box-shadow: 0 4px 15px {colors['shadow']};
+        box-shadow: 0 1px 3px {colors['shadow']};
+        border: 1px solid #f39c12;
     }}
     
     .sidebar-logo {{
         text-align: center;
         padding: 1rem;
-        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
-        border-radius: 12px;
+        background: {colors['accent_primary']};
+        border-radius: 6px;
         color: white;
         margin-bottom: 1rem;
-        box-shadow: 0 4px 15px {colors['shadow']};
+        box-shadow: 0 1px 3px {colors['shadow']};
+        border: 1px solid #2c3e50;
     }}
     
     .stButton > button {{
-        background: linear-gradient(90deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
+        background: {colors['accent_primary']};
         color: white;
-        border: none;
-        border-radius: 10px;
+        border: 1px solid #2c3e50;
+        border-radius: 6px;
         padding: 0.75rem 2rem;
         font-weight: bold;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px {colors['shadow']};
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px {colors['shadow']};
     }}
     
     .stButton > button:hover {{
-        background: linear-gradient(90deg, {colors['accent_secondary']} 0%, {colors['accent_primary']} 100%);
-        box-shadow: 0 6px 25px {colors['shadow']};
-        transform: translateY(-2px);
+        background: {colors['accent_secondary']};
+        box-shadow: 0 2px 6px {colors['shadow']};
     }}
     
     .diagnostic-result {{
         padding: 1.5rem;
-        border-radius: 12px;
+        border-radius: 6px;
         margin: 1rem 0;
-        border: 2px solid;
-        box-shadow: 0 4px 20px {colors['shadow']};
+        border: 1px solid;
+        box-shadow: 0 1px 3px {colors['shadow']};
     }}
     
     .positive-result {{
-        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        background: #ffebee;
         border-color: {colors['error']};
         color: #d32f2f;
     }}
     
     .negative-result {{
-        background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        background: #e8f5e8;
         border-color: {colors['success']};
         color: #2e7d32;
     }}
@@ -204,38 +205,7 @@ st.markdown(f"""
     /* Sidebar styling */
     .css-1d391kg {{
         background: {colors['bg_card']};
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }}
-    
-    /* Tab styling for portrait mode */
-    .nav-tabs {{
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-    }}
-    
-    .nav-tab {{
-        padding: 1rem;
-        background: {colors['bg_card']};
-        border-radius: 10px;
-        border: 2px solid transparent;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-        color: {colors['text_primary']};
-        box-shadow: 0 2px 10px {colors['shadow']};
-    }}
-    
-    .nav-tab:hover {{
-        border-color: {colors['accent_primary']};
-        transform: translateY(-2px);
-    }}
-    
-    .nav-tab.active {{
-        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
-        color: white;
-        border-color: {colors['accent_primary']};
+        border-right: 1px solid #e1e8ed;
     }}
     
     /* Theme toggle button */
@@ -268,13 +238,14 @@ st.markdown(f"""
     /* Remove default streamlit styling */
     .stSelectbox > div > div {{
         background: {colors['bg_card']};
-        border-radius: 10px;
+        border-radius: 6px;
+        border: 1px solid #e1e8ed;
     }}
     
     .stTextInput > div > div {{
         background: {colors['bg_card']};
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        border: 1px solid #e1e8ed;
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -653,9 +624,9 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
             """, unsafe_allow_html=True)
         
         with col2:
-            risk_color = {"Very Low": "#4CAF50", "Low": "#8BC34A", "Moderate": "#FF9800", "High": "#FF5722", "Very High": "#F44336"}.get(risk_level, "#666")
+            risk_color = {"Very Low": "#27ae60", "Low": "#2ecc71", "Moderate": "#f39c12", "High": "#e67e22", "Very High": "#e74c3c"}.get(risk_level, "#666")
             st.markdown(f"""
-            <div class="metric-card" style="background: linear-gradient(135deg, {risk_color} 0%, {risk_color}AA 100%);">
+            <div class="metric-card" style="background: {risk_color}; border: 1px solid {risk_color};">
                 <h4>Risk Level</h4>
                 <h2>{risk_level}</h2>
             </div>
@@ -680,9 +651,9 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
         
         with col2:
             spread_type = tumor_features.get('spread_pattern', 'None')
-            spread_color = {"Contained": "#4CAF50", "Irregular": "#FF9800", "Diffuse": "#F44336", "None": "#9E9E9E"}.get(spread_type, "#666")
+            spread_color = {"Contained": "#27ae60", "Irregular": "#f39c12", "Diffuse": "#e74c3c", "None": "#95a5a6"}.get(spread_type, "#666")
             st.markdown(f"""
-            <div class="metric-card" style="background: linear-gradient(135deg, {spread_color} 0%, {spread_color}AA 100%);">
+            <div class="metric-card" style="background: {spread_color}; border: 1px solid {spread_color};">
                 <h4>Spread Pattern</h4>
                 <h2>{spread_type}</h2>
             </div>

@@ -9,8 +9,8 @@ This is a comprehensive AI-powered medical diagnostic system for retinoblastoma 
 Preferred communication style: Simple, everyday language.
 UI/UX preferences: Modern, formal medical interface with clean professional design, no icons or emojis.
 Authentication: Secure sign-in system with demo credentials (doctor/medical123).
-Visual enhancements: Gradient backgrounds, enhanced cards, modern color schemes, professional medical theming, formal appearance.
-Theme support: Light/Dark mode toggle with positive gradient backgrounds for uplifting feel.
+Visual enhancements: Clean, professional medical interface with subtle shadows and borders, formal appearance.
+Theme support: Light/Dark mode toggle with professional color schemes suitable for medical applications.
 Navigation: Portrait-friendly tab navigation with 2-column layout instead of dropdown menus.
 
 ## System Architecture
