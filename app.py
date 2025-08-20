@@ -224,10 +224,6 @@ st.markdown(f"""
         .login-content {{
             flex-direction: column;
         }}
-        
-        .login-info-section {{
-            order: -1;
-        }}
     }}
     
     /* Remove default streamlit styling */
@@ -278,26 +274,47 @@ def check_authentication():
 
 
 def login_page():
-    """Enhanced login page with app information"""
+    """Enhanced login page with app overview and sign-in"""
     st.markdown('<div class="login-page">', unsafe_allow_html=True)
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
     st.markdown('<div class="login-content">', unsafe_allow_html=True)
     
-    # Left side - Login form
+    # Left side - App overview
+    st.markdown("""
+    <div class="login-info-section">
+        <h1>RetinaScan AI</h1>
+        <h2>Advanced Retinoblastoma Diagnostic Platform</h2>
+        
+        <div style="margin: 2rem 0;">
+            <h3>Overview</h3>
+            <p>RetinaScan AI is a comprehensive medical diagnostic system powered by advanced VGG16 CNN architecture for retinoblastoma detection and clinical staging.</p>
+            
+            <p>Our platform provides healthcare professionals with AI-powered diagnostic capabilities, achieving 90%+ accuracy in tumor detection and automated clinical staging following International Classification guidelines.</p>
+            
+            <p>The system integrates advanced image processing, tumor segmentation, and evidence-based treatment recommendations to support clinical decision-making.</p>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
+            <p><strong>Professional Medical Platform</strong></p>
+            <p>Designed for Healthcare Professionals</p>
+            <p>Secure • HIPAA Compliant • Evidence-Based</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Right side - Sign in form
     st.markdown('<div class="login-form-section">', unsafe_allow_html=True)
-    st.markdown('<div class="login-header"><h1>RetinaScan AI</h1><p>Advanced Retinoblastoma Diagnostic Platform</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-header"><h2>Professional Access</h2></div>', unsafe_allow_html=True)
     
     # Demo credentials info
     st.info("**Demo Access:** Use username 'doctor' and password 'medical123' for demonstration")
     
     with st.form("login_form"):
-        st.markdown("### Professional Sign In")
+        st.markdown("### Sign In")
         username = st.text_input("Username", placeholder="Enter your username")
         password = st.text_input("Password", type="password", placeholder="Enter your password")
         
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            submit = st.form_submit_button("Sign In", use_container_width=True)
+        submit = st.form_submit_button("Sign In", use_container_width=True)
         
         if submit:
             # Simple authentication (in production, use proper authentication)
@@ -312,34 +329,6 @@ def login_page():
                 st.error("Invalid credentials. Please try again.")
     
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Right side - App information
-    st.markdown("""
-    <div class="login-info-section">
-        <h2>Advanced AI Diagnostic System</h2>
-        <p>RetinaScan AI is a comprehensive medical diagnostic platform designed for retinoblastoma detection and clinical staging using advanced VGG16 CNN architecture.</p>
-        
-        <h3>Key Features</h3>
-        <ul class="feature-list">
-            <li><strong>AI-Powered Detection:</strong> 90%+ diagnostic accuracy using deep learning</li>
-            <li><strong>Clinical Staging:</strong> Automated classification following International Guidelines</li>
-            <li><strong>Tumor Analysis:</strong> Advanced segmentation and spread pattern analysis</li>
-            <li><strong>Risk Assessment:</strong> Comprehensive staging from Groups A-E</li>
-            <li><strong>Treatment Guidelines:</strong> Evidence-based clinical recommendations</li>
-            <li><strong>Medical Visualization:</strong> Interactive charts and tumor highlighting</li>
-        </ul>
-        
-        <h3>Technology</h3>
-        <p><strong>VGG16 CNN Architecture:</strong> Transfer learning with multi-task outputs for detection, staging, and segmentation</p>
-        <p><strong>Medical Image Processing:</strong> Advanced preprocessing pipeline optimized for retinal imaging</p>
-        <p><strong>Clinical Decision Support:</strong> Integrated medical knowledge base with treatment protocols</p>
-        
-        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
-            <p><strong>Professional Medical Platform</strong></p>
-            <p>Designed for healthcare professionals • HIPAA Compliant • Secure Authentication</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
     
     st.markdown('</div></div></div>', unsafe_allow_html=True)
     

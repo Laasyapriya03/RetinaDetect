@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 UI/UX preferences: Modern, formal medical interface with clean professional design, no icons or emojis.
 Authentication: Secure sign-in system with demo credentials (doctor/medical123).
 Visual enhancements: Clean, professional medical interface with subtle shadows and borders, formal appearance.
-Login page: Comprehensive app information and features displayed alongside sign-in form to eliminate empty space.
+Login page: App overview on left side with sign-in form on right side for balanced layout.
 Navigation: Portrait-friendly tab navigation with 2-column layout instead of dropdown menus.
 
 ## System Architecture
