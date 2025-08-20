@@ -4,9 +4,6 @@ import pandas as pd
 import cv2
 from PIL import Image
 import tensorflow as tf
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout, Conv2D, UpSampling2D
-from tensorflow.keras.models import Model
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.express as px
@@ -101,7 +98,7 @@ def diagnostic_analysis_page():
         if uploaded_file is not None:
             # Display uploaded image
             image = Image.open(uploaded_file)
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            st.image(image, caption="Uploaded Image", use_container_width=True)
             
             # Image information
             st.info(f"📊 Image Details: {image.size[0]}x{image.size[1]} pixels, Format: {image.format}")
@@ -212,7 +209,7 @@ def display_analysis_results(results, original_image, visualizer, staging_classi
                 original_image, 
                 results['segmentation_mask']
             )
-            st.image(segmented_image, caption="Tumor Regions Highlighted", use_column_width=True)
+            st.image(segmented_image, caption="Tumor Regions Highlighted", use_container_width=True)
         
         # Detailed staging information
         staging_details = staging_classifier.get_staging_details(predicted_stage)
@@ -333,16 +330,22 @@ def educational_resources_page():
         
         # Model architecture diagram
         st.subheader("Model Architecture Flow")
-        st.mermaid("""
-        graph TD
-            A[Input Image 224x224x3] --> B[VGG16 Feature Extractor]
-            B --> C[Global Average Pooling]
-            C --> D[Detection Branch]
-            C --> E[Staging Branch]
-            C --> F[Segmentation Branch]
-            D --> G[Binary Classification]
-            E --> H[5-Class Staging]
-            F --> I[Pixel-wise Segmentation]
+        st.markdown("""
+        ```
+        Input Image (224x224x3)
+                ↓
+        VGG16 Feature Extractor
+                ↓
+        Global Average Pooling
+                ↓
+        ┌───────┼───────┼───────┐
+        ↓       ↓       ↓       ↓
+    Detection  Staging  Segmentation
+    Branch     Branch   Branch
+        ↓       ↓       ↓
+    Binary   5-Class  Pixel-wise
+    Classification  Staging  Segmentation
+        ```
         """)
     
     with tab2:
