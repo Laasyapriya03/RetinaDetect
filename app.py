@@ -26,111 +26,256 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for enhanced visual appeal
-st.markdown("""
+# Initialize theme state
+if 'dark_mode' not in st.session_state:
+    st.session_state.dark_mode = False
+
+# Custom CSS for enhanced visual appeal with theme support
+def get_theme_colors():
+    if st.session_state.dark_mode:
+        return {
+            'bg_primary': '#1a1a1a',
+            'bg_secondary': '#2d2d2d',
+            'bg_card': '#363636',
+            'text_primary': '#ffffff',
+            'text_secondary': '#cccccc',
+            'accent_primary': '#4a9eff',
+            'accent_secondary': '#6bb6ff',
+            'success': '#4caf50',
+            'warning': '#ff9800',
+            'error': '#f44336',
+            'shadow': 'rgba(0, 0, 0, 0.5)'
+        }
+    else:
+        return {
+            'bg_primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'bg_secondary': '#f8f9ff',
+            'bg_card': '#ffffff',
+            'text_primary': '#2c3e50',
+            'text_secondary': '#5a6c7d',
+            'accent_primary': '#4a90e2',
+            'accent_secondary': '#6bb6ff',
+            'success': '#27ae60',
+            'warning': '#f39c12',
+            'error': '#e74c3c',
+            'shadow': 'rgba(0, 0, 0, 0.1)'
+        }
+
+colors = get_theme_colors()
+
+st.markdown(f"""
 <style>
-    .main-header {
-        background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+    /* Main app background */
+    .stApp {{
+        background: {colors['bg_primary']};
+        min-height: 100vh;
+    }}
+    
+    /* Main content area */
+    .main .block-container {{
+        background: transparent;
+        padding-top: 2rem;
+    }}
+    
+    .main-header {{
+        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
         padding: 2rem;
-        border-radius: 10px;
+        border-radius: 15px;
         margin-bottom: 2rem;
         color: white;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        box-shadow: 0 8px 32px {colors['shadow']};
+        backdrop-filter: blur(10px);
+    }}
     
-    .feature-card {
-        background: white;
+    .feature-card {{
+        background: {colors['bg_card']};
         padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #2a5298;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px {colors['shadow']};
+        border: 1px solid rgba(255, 255, 255, 0.1);
         margin: 1rem 0;
-    }
+        color: {colors['text_primary']};
+        backdrop-filter: blur(10px);
+    }}
     
-    .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .metric-card {{
+        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 10px;
         color: white;
         text-align: center;
         margin: 0.5rem 0;
-    }
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
     
-    .login-container {
-        max-width: 400px;
-        margin: 2rem auto;
+    .login-page {{
+        background: {colors['bg_primary']};
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 2rem;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
+    }}
     
-    .login-header {
+    .login-container {{
+        max-width: 400px;
+        width: 100%;
+        padding: 2rem;
+        background: {colors['bg_card']};
+        border-radius: 20px;
+        box-shadow: 0 20px 60px {colors['shadow']};
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+    }}
+    
+    .login-header {{
         text-align: center;
         margin-bottom: 2rem;
-        color: #1e3c72;
-    }
+        color: {colors['text_primary']};
+    }}
     
-    .success-banner {
-        background: linear-gradient(90deg, #56ab2f 0%, #a8e6cf 100%);
+    .success-banner {{
+        background: linear-gradient(90deg, {colors['success']} 0%, #a8e6cf 100%);
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 10px;
         color: white;
         text-align: center;
         margin: 1rem 0;
-    }
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
     
-    .warning-banner {
-        background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 100%);
+    .warning-banner {{
+        background: linear-gradient(90deg, {colors['warning']} 0%, #ffd54f 100%);
         padding: 1rem;
-        border-radius: 8px;
-        color: #8B0000;
+        border-radius: 10px;
+        color: white;
         margin: 1rem 0;
-    }
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
     
-    .sidebar-logo {
+    .sidebar-logo {{
         text-align: center;
         padding: 1rem;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        border-radius: 10px;
+        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
+        border-radius: 12px;
         color: white;
         margin-bottom: 1rem;
-    }
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
     
-    .stButton > button {
-        background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+    .stButton > button {{
+        background: linear-gradient(90deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
         color: white;
         border: none;
-        border-radius: 8px;
-        padding: 0.5rem 2rem;
-        font-weight: bold;
-        transition: all 0.3s;
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(90deg, #2a5298 0%, #1e3c72 100%);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .diagnostic-result {
-        padding: 1rem;
         border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
+    
+    .stButton > button:hover {{
+        background: linear-gradient(90deg, {colors['accent_secondary']} 0%, {colors['accent_primary']} 100%);
+        box-shadow: 0 6px 25px {colors['shadow']};
+        transform: translateY(-2px);
+    }}
+    
+    .diagnostic-result {{
+        padding: 1.5rem;
+        border-radius: 12px;
         margin: 1rem 0;
         border: 2px solid;
-    }
+        box-shadow: 0 4px 20px {colors['shadow']};
+    }}
     
-    .positive-result {
-        background-color: #ffebee;
-        border-color: #f44336;
+    .positive-result {{
+        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        border-color: {colors['error']};
         color: #d32f2f;
-    }
+    }}
     
-    .negative-result {
-        background-color: #e8f5e8;
-        border-color: #4caf50;
+    .negative-result {{
+        background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        border-color: {colors['success']};
         color: #2e7d32;
-    }
+    }}
+    
+    /* Sidebar styling */
+    .css-1d391kg {{
+        background: {colors['bg_card']};
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }}
+    
+    /* Tab styling for portrait mode */
+    .nav-tabs {{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }}
+    
+    .nav-tab {{
+        padding: 1rem;
+        background: {colors['bg_card']};
+        border-radius: 10px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        color: {colors['text_primary']};
+        box-shadow: 0 2px 10px {colors['shadow']};
+    }}
+    
+    .nav-tab:hover {{
+        border-color: {colors['accent_primary']};
+        transform: translateY(-2px);
+    }}
+    
+    .nav-tab.active {{
+        background: linear-gradient(135deg, {colors['accent_primary']} 0%, {colors['accent_secondary']} 100%);
+        color: white;
+        border-color: {colors['accent_primary']};
+    }}
+    
+    /* Theme toggle button */
+    .theme-toggle {{
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+        background: {colors['bg_card']};
+        border: 2px solid {colors['accent_primary']};
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: {colors['text_primary']};
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px {colors['shadow']};
+    }}
+    
+    .theme-toggle:hover {{
+        background: {colors['accent_primary']};
+        color: white;
+        transform: scale(1.1);
+    }}
+    
+    /* Remove default streamlit styling */
+    .stSelectbox > div > div {{
+        background: {colors['bg_card']};
+        border-radius: 10px;
+    }}
+    
+    .stTextInput > div > div {{
+        background: {colors['bg_card']};
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -164,8 +309,32 @@ def check_authentication():
     """Check if user is authenticated"""
     return st.session_state.get('authenticated', False)
 
+def theme_toggle():
+    """Theme toggle component"""
+    theme_icon = "☀️" if st.session_state.dark_mode else "🌙"
+    
+    st.markdown(f"""
+    <div class="theme-toggle" onclick="toggleTheme()">
+        {theme_icon}
+    </div>
+    <script>
+    function toggleTheme() {{
+        // This would trigger a callback in a real implementation
+        // For now, we'll handle it through Streamlit
+    }}
+    </script>
+    """, unsafe_allow_html=True)
+
 def login_page():
     """Enhanced login page with modern design"""
+    # Theme toggle
+    col1, col2 = st.columns([3, 1])
+    with col2:
+        if st.button("🌙" if not st.session_state.dark_mode else "☀️", key="theme_toggle"):
+            st.session_state.dark_mode = not st.session_state.dark_mode
+            st.rerun()
+    
+    st.markdown('<div class="login-page">', unsafe_allow_html=True)
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
     st.markdown('<div class="login-header"><h1>RetinaScan AI</h1><p>Advanced Retinoblastoma Diagnostic Platform</p></div>', unsafe_allow_html=True)
     
@@ -193,7 +362,7 @@ def login_page():
             else:
                 st.error("Invalid credentials. Please try again.")
     
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
     
     # Footer
     st.markdown("---")
@@ -211,12 +380,40 @@ def logout():
             del st.session_state[key]
     st.rerun()
 
+# Portrait navigation component
+def render_navigation():
+    """Render navigation in portrait mode with tabs"""
+    nav_options = ["Diagnostic Analysis", "Model Performance", "Educational Resources", "About Retinoblastoma"]
+    
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = nav_options[0]
+    
+    st.markdown("### Navigation")
+    
+    # Create navigation tabs in portrait mode
+    cols = st.columns(2)
+    for i, option in enumerate(nav_options):
+        col_idx = i % 2
+        with cols[col_idx]:
+            if st.button(option, key=f"nav_{i}", use_container_width=True):
+                st.session_state.current_page = option
+                st.rerun()
+    
+    return st.session_state.current_page
+
 # Main application
 def main():
     # Check authentication
     if not check_authentication():
         login_page()
         return
+    
+    # Theme toggle in header
+    col1, col2 = st.columns([4, 1])
+    with col2:
+        if st.button("🌙 Dark" if not st.session_state.dark_mode else "☀️ Light", key="main_theme_toggle"):
+            st.session_state.dark_mode = not st.session_state.dark_mode
+            st.rerun()
     
     # Main header with enhanced design
     st.markdown("""
@@ -231,23 +428,14 @@ def main():
     with st.sidebar:
         st.markdown('<div class="sidebar-logo"><h3>RetinaScan AI</h3></div>', unsafe_allow_html=True)
         
-        # User info
+        # User info and logout
         st.markdown(f"**Welcome, Dr. {st.session_state.get('username', 'User')}**")
         if st.button("Sign Out", key="logout"):
             logout()
         
         st.markdown("---")
         
-        # Enhanced navigation
-        st.markdown("### Navigation Menu")
-        page = st.selectbox(
-            "Select Module",
-            ["Diagnostic Analysis", "Model Performance", "Educational Resources", "About Retinoblastoma"],
-            key="navigation"
-        )
-        
         # Quick stats
-        st.markdown("---")
         st.markdown("### System Status")
         st.markdown("""
         <div class="metric-card">
@@ -262,6 +450,9 @@ def main():
             <h2>1,247</h2>
         </div>
         """, unsafe_allow_html=True)
+    
+    # Navigation in main area (portrait mode friendly)
+    page = render_navigation()
     
     # Medical disclaimer with enhanced styling
     st.markdown("""
