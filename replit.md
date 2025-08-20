@@ -11,6 +11,7 @@ UI/UX preferences: Modern, formal medical interface with clean professional desi
 Visual enhancements: Clean, professional medical interface with subtle shadows and borders, formal appearance.
 Access: Direct access without authentication for streamlined user experience.
 Navigation: Dropdown menu system for easy section selection.
+Sidebar: Minimal sidebar with logo only, no system status metrics.
 
 ## System Architecture
 

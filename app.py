@@ -251,24 +251,6 @@ def main():
     # Enhanced sidebar
     with st.sidebar:
         st.markdown('<div class="sidebar-logo"><h3>RetinaScan AI</h3></div>', unsafe_allow_html=True)
-        
-        st.markdown("---")
-        
-        # Quick stats
-        st.markdown("### System Status")
-        st.markdown("""
-        <div class="metric-card">
-            <h4>Model Accuracy</h4>
-            <h2>92.3%</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class="metric-card">
-            <h4>Cases Analyzed</h4>
-            <h2>1,247</h2>
-        </div>
-        """, unsafe_allow_html=True)
     
     # Navigation in main area (portrait mode friendly)
     page = render_navigation()
