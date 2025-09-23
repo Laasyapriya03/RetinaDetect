@@ -11,6 +11,7 @@ from io import BytesIO
 import base64
 import time
 import hashlib
+from pathlib import Path
 
 from models.retinoblastoma_model import RetinoblastomaModel
 from utils.image_preprocessing import ImagePreprocessor
@@ -300,22 +301,45 @@ def diagnostic_analysis_page():
             help="Upload high-quality retinal photographs (JPEG/PNG format)",
             key="image_uploader"
         )
-        
-        if uploaded_file is not None:
-            # Display uploaded image with enhanced styling
-            image = Image.open(uploaded_file)
+
+        # --- ADDED: allow loading image by local file path ---
+        with st.expander("Or load image from local filesystem (provide full path)", expanded=False):
+            local_path = st.text_input("Local image path (e.g. C:\\\\path\\\\to\\\\image.jpg)", key="local_image_path")
+            if st.button("Load from path", key="load_path_button"):
+                try:
+                    img = Image.open(local_path)
+                    st.session_state['loaded_local_image'] = True
+                    st.session_state['local_image_obj'] = img
+                    st.session_state['local_image_path'] = local_path
+                    st.success("Image loaded from disk")
+                    st.experimental_rerun()
+                except Exception as e:
+                    st.error(f"Could not open image: {e}")
+        # --- END ADDED ---
+
+        if uploaded_file is not None or st.session_state.get('loaded_local_image', False):
+            if uploaded_file is not None:
+                image = Image.open(uploaded_file)
+            else:
+                image = st.session_state.get('local_image_obj')
+
             st.image(image, caption="Uploaded Retinal Image", use_container_width=True)
-            
+
             # Enhanced image information
+            try:
+                file_size_kb = (len(uploaded_file.getvalue()) / 1024) if uploaded_file is not None else (Path(st.session_state.get('local_image_path')).stat().st_size / 1024)
+            except Exception:
+                file_size_kb = 0.0
+
             st.markdown(f"""
             <div style="background: #f0f7ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
                 <h5>Image Details</h5>
                 <p><strong>Dimensions:</strong> {image.size[0]} × {image.size[1]} pixels</p>
                 <p><strong>Format:</strong> {image.format}</p>
-                <p><strong>File Size:</strong> {len(uploaded_file.getvalue()) / 1024:.1f} KB</p>
+                <p><strong>File Size:</strong> {file_size_kb:.1f} KB</p>
             </div>
             """, unsafe_allow_html=True)
-            
+
             # Enhanced analysis button
             if st.button("Run AI Analysis", type="primary", use_container_width=True):
                 with st.spinner("Processing image and running AI analysis..."):
@@ -324,21 +348,20 @@ def diagnostic_analysis_page():
                     for i in range(100):
                         time.sleep(0.01)
                         progress.progress(i + 1)
-                    
+
                     # Preprocess image
                     processed_image = preprocessor.preprocess_for_inference(image)
-                    
+
                     # Run model inference
                     results = model.predict(processed_image)
-                    
+
                     # Store results in session state
                     st.session_state.analysis_results = results
                     st.session_state.original_image = image
                     st.session_state.processed_image = processed_image
-                
+
                 st.markdown('<div class="success-banner"><h4>Analysis completed successfully</h4></div>', unsafe_allow_html=True)
                 st.rerun()
-        
         else:
             st.markdown("""
             <div style="text-align: center; padding: 2rem; border: 2px dashed #ccc; border-radius: 10px; margin: 1rem 0;">
